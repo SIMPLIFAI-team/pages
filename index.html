@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Demo</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            background-image: url('https://public.etal.solutions/assets/et-al-solutions-llc/logos/woodgrain.png');
+            color: #C1BFC0;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            color: #123BFF;
+            font-size: 2.5em;
+        }
+        .logo {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .logo span {
+            font-weight: bold;
+        }
+        .logo .ai {
+            color: #123BFF;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            .logo {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <h1>
+            Please contact the <span id="origin-slot"></span> bidder to activate the demo.
+        </h1>
+    </div>
+
+    <script>
+        (function () {
+            // Choose the best representation of the original URL associated with this request.
+            function getOriginalUrl() {
+                try {
+                    const params = new URLSearchParams(window.location.search);
+                    // Prefer explicit query params if provided
+                    const fromParam = params.get('original_url') || params.get('originalUrl') || params.get('url');
+                    if (fromParam) return fromParam;
+                    // Fallback to referrer if present
+                    if (document.referrer) return document.referrer;
+                } catch (e) { /* ignore */ }
+                // Last resort: the current page URL
+                return window.location.host.toUpperCase();
+            }
+
+            const origin = getOriginalUrl();
+            const slot = document.getElementById('origin-slot');
+            if (slot && origin) {
+                slot.replaceWith(origin)
+            }
+        })();
+    </script>
+</body>
+</html>
